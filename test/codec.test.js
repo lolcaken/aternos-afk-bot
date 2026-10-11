@@ -1,4 +1,4 @@
-// Runnable self-check for pasted-client's protocol encoding.
+﻿// Runnable self-check for pasted-client's protocol encoding.
 //   node codec.test.js
 const assert = require("assert");
 
@@ -55,7 +55,7 @@ for (const d of [0, 1, -1, 3.141592653589793, -12345.6789, 1e10, 64, 184.5]) {
   assert.strictEqual(buf.readDoubleBE(0), d, `double ${d}`);
 }
 
-const { PROTOCOL, PastedClient } = require("./pasted-client.js");
+const { PROTOCOL, PastedClient } = require("../src/client/index.js");
 assert.strictEqual(PROTOCOL, 777, "protocol must be 777 for 26.3");
 
 const crypto = require("crypto");

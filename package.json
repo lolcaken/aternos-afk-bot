@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node codec.test.js && node --check index.js && node --check pasted-client.js"
+    "test": "node test/codec.test.js && node --check index.js"
   },
   "author": "Lamgerr",
   "license": "MIT",

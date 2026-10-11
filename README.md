@@ -210,6 +210,35 @@ change it).
 
 ---
 
+## Project structure
+
+```
+index.js              entry point — starts the bot and the HTTP server
+settings.json         your config (edit this)
+src/
+  logger.js           timestamped console log + in-memory ring buffer
+  client/             the Minecraft 26.3 client
+    protocol.js       VarInt/string/double codec, packet ids, connection states
+    nbt.js            network-NBT reader (kick/disconnect reasons)
+    index.js          connection lifecycle, login, config, play states
+  bot/
+    state.js          shared mutable state (connection, spawn counters, timers)
+    controller.js     reconnect policy, createBot, console commands, crash recovery
+    modules.js        post-spawn behaviour (the optional one-shot chat)
+    discord.js        webhook sender with rate limiting
+  http/
+    server.js         routes, health, control endpoints, keep-alive ping
+    views.js          dashboard / tutorial / log page markup
+    render.js         HTML escaping and log-line colouring
+test/
+  codec.test.js       protocol encoding checks
+```
+
+`src/bot/state.js` exists so `controller.js` and `modules.js` share the spawn
+counter and interval list without importing each other.
+
+---
+
 ## Tests
 
 ```bash
