@@ -1,0 +1,66 @@
+{
+  "name": "pasted aternos",
+  "bot-account": {
+    "username": "botlol",
+    "password": "",
+    "type": "offline"
+  },
+  "server": {
+    "ip": "your-server.aternos.me",
+    "port": 12345,
+    "version": "",
+    "try-creative": false
+  },
+  "position": {
+    "enabled": false,
+    "x": 0,
+    "y": 100,
+    "z": 0
+  },
+  "utils": {
+    "anti-afk": {
+      "enabled": true,
+      "sneak": true
+    },
+    "chat-messages": {
+      "enabled": false,
+      "repeat": false,
+      "repeat-delay": 120,
+      "messages": []
+    },
+    "chat-log": true,
+    "auto-reconnect": true,
+    "auto-reconnect-delay": 60000,
+    "max-reconnect-delay": 180000
+  },
+  "movement": {
+    "enabled": true,
+    "circle-walk": {
+      "enabled": false,
+      "radius": 4,
+      "speed": 3000
+    },
+    "look-around": {
+      "enabled": false,
+      "interval": 5000
+    },
+    "random-jump": {
+      "enabled": false,
+      "interval": 10000
+    }
+  },
+  "discord": {
+    "enabled": false,
+    "displayName": "pasted aternos",
+    "avatarUrl": "",
+    "webhookUrl": "",
+    "events": {
+      "connect": true,
+      "disconnect": true,
+      "chat": false
+    }
+  },
+  "chat": {
+    "respond": false
+  }
+}

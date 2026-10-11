@@ -1,0 +1,18 @@
+{
+  "name": "pasted-aternos",
+  "version": "2.6.0",
+  "description": "Robust AFK bot for Minecraft servers with infinite uptime.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node codec.test.js && node --check index.js && node --check pasted-client.js"
+  },
+  "author": "Lamgerr",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
