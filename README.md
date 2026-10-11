@@ -6,34 +6,20 @@
 ![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 ![status](https://img.shields.io/badge/status-stable-green?style=flat-square)
 
-**How to keep an Aternos server online 24/7 without paying** — an AFK bot that
-logs in and holds the connection open so Aternos never sees an idle server.
-
 A headless Minecraft client that keeps an Aternos server alive by holding a
 connection open. Speaks **protocol 777 (26.3)** natively — no Minecraft account,
 no launcher, no `mineflayer`.
 
 ![what it does](https://img.shields.io/badge/keeps-Aternos%20online-7B2FBE?style=for-the-badge&logo=discord&logoColor=white)
 
-> **TL;DR** — `git clone https://github.com/lolcaken/pasted-aternos.git`,
-> `npm install`, put your server address in `settings.json`, turn on **Cracked**
-> mode in Aternos, then `npm start`.
-
 ---
 
-## Why does my Aternos server keep shutting down?
+## Why this exists
 
-Aternos stops a server after it sits idle with no players. Every free server
-gets a countdown, and when it hits zero the server stops. Being the one person
-logged in prevents that — and a bot does it for you, forever, without you
-having to sit in the client.
+Aternos shuts a server down when it goes idle. A bot that just sits in the
+lobby counts as a player and prevents that.
 
-This is the "Aternos AFK bot" approach: the bot connects, stays connected, and
-answers the server's keep-alives so it is never treated as disconnected.
-
-### Most existing AFK bots don't work on modern servers
-
-Most Aternos AFK bots use `mineflayer`, which only knows protocol **775 (26.1)**.
+Most AFK bots for this use `mineflayer`, which only knows protocol **775 (26.1)**.
 On a 26.3 server, ViaVersion has to translate every packet, and it mistranslates
 the movement ones — the client gets kicked about a second after joining:
 
@@ -43,43 +29,6 @@ Kicked: Invalid move player packet received
 
 This client declares **777** directly, so there is no translation layer and
 nothing to mistranslate.
-
----
-
-## FAQ
-
-### How do I keep my Aternos server online 24/7 for free?
-
-Run this bot on any always-on machine (VPS, Railway, Render, a Raspberry Pi)
-or on your own PC. Start it and leave it. Setup is four steps: clone, `npm
-install`, edit `settings.json`, `npm start`. Full instructions below.
-
-### Does it need a paid Minecraft account?
-
-No. It connects in **offline (cracked) mode** with any username. That does
-require **Cracked mode enabled** in your Aternos options, because online-mode
-servers require Microsoft authentication and will refuse the login.
-
-### Will Aternos ban me for this?
-
-Aternos' terms prohibit using bots to keep servers running. Use it at your own
-risk, and expect it to stop working when Aternos updates their detection.
-
-### Why does the bot need to be running 24/7?
-
-Because the bot *is* the uptime. The moment it disconnects, Aternos starts the
-idle countdown again. That's why it's built to reconnect automatically — see
-[Reconnect behaviour](#reconnect-behaviour).
-
-### Does it work on Bedrock?
-
-No. This speaks the Java Edition protocol only. Bedrock is a different protocol
-entirely.
-
-### Can I use it to stay on while playing?
-
-Yes, but that's unnecessary — just log in yourself while you play. This is for
-when nobody is on.
 
 ---
 
@@ -178,33 +127,8 @@ avatar.
 | `position.enabled` | `false` | Walk to a set coordinate — off by default |
 | `movement.circle-walk.enabled` | `false` | Circle-walk around spawn |
 
-### Reconnect behaviour
-
-The bot treats the server like a real player would:
-
-| Situation | Delay |
-|---|---|
-| Server empty, nothing to protect | 1 minute |
-| Real players online | 3 minutes |
-| Server never came online | 10–15 minutes |
-| Server throttling us | 1–2 minutes |
-
-It also survives being kicked mid-session and reconnects by itself, so you don't
-have to babysit it.
-
----
-
-## Who is this for
-
-Anyone whose **Aternos server shuts down while they're away** — building an SMP,
-running events for friends, or just wanting the server to exist without paying
-for hosting. Also useful for **keeping a test or event server warm** between
-sessions.
-
-Search terms, if you got here from Google: *aternos 24/7*, *aternos afk bot*,
-*keep aternos server online*, *aternos server keeps shutting down*, *free
-minecraft server 24/7*, *aternos bot 2026*, *minecraft headless client*, *aternos
-cracked bot*.
+**Reconnect logic:** 1 minute when the server is empty, 3 minutes when real
+players are on, and 10+ minutes if the server never came online at all.
 
 ---
 
