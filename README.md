@@ -74,10 +74,15 @@ guide recommends. The bot itself only depends on ViaVersion.
 **1. Get the files**
 
 ```bash
-git clone https://github.com/lolcaken/pasted-aternos.git
-cd pasted-aternos
+git clone https://github.com/lolcaken/aternos-afk-bot.git
+cd aternos-afk-bot
 npm install
 ```
+
+> **Hosting somewhere that mangles folders?** Some game-host panels drop
+> nested folders on upload, which breaks the `src/` tree. `index.js` in this
+> repo is a **pre-built single-file bundle** — upload just `index.js` and
+> `settings.json` and it works with no subfolders at all.
 
 **2. Enable cracked mode on Aternos**
 
@@ -213,7 +218,8 @@ change it).
 ## Project structure
 
 ```
-index.js              entry point — starts the bot and the HTTP server
+index.js              entry point / pre-built single-file bundle
+build.js              regenerates index.js from src/
 settings.json         your config (edit this)
 src/
   logger.js           timestamped console log + in-memory ring buffer
@@ -233,6 +239,10 @@ src/
 test/
   codec.test.js       protocol encoding checks
 ```
+
+`index.js` at the root is **generated** — edit the files under `src/` and run
+`node build.js` to regenerate the bundle. This exists because some host panels
+drop nested folders on upload; the bundle has no folder dependencies.
 
 `src/bot/state.js` exists so `controller.js` and `modules.js` share the spawn
 counter and interval list without importing each other.
