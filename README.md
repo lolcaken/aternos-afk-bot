@@ -1,4 +1,4 @@
-# pasted aternos
+# aternos-afk-bot
 
 ![node](https://img.shields.io/badge/node-%3E%3D18-5FA04E?style=flat-square&logo=node.js)
 ![protocol](https://img.shields.io/badge/protocol-777%20(26.3)-7B2FBE?style=flat-square)
@@ -9,8 +9,6 @@
 A headless Minecraft client that keeps an Aternos server alive by holding a
 connection open. Speaks **protocol 777 (26.3)** natively — no Minecraft account,
 no launcher, no `mineflayer`.
-
-![what it does](https://img.shields.io/badge/keeps-Aternos%20online-7B2FBE?style=for-the-badge&logo=discord&logoColor=white)
 
 ---
 
@@ -36,11 +34,38 @@ nothing to mistranslate.
 
 - **Node.js 18 or newer** (no native builds, nothing to compile)
 - **Aternos server** with **Cracked / offline mode enabled**
+- **ViaVersion** on the server (see below)
 - Nothing else. One dependency: `express`.
 
 > **Cracked mode is mandatory.** With online-mode on, the server asks for
 > Microsoft authentication and an offline bot cannot log in. The client detects
 > this and says so instead of hanging.
+
+### Via plugins
+
+This bot speaks **26.3**. Whether your server needs the Via family depends on
+which version it runs:
+
+| Server version | Via needed for the bot? |
+|---|---|
+| 26.3 | No — the bot connects natively, nothing to translate |
+| Older than 26.3 | **Yes** — ViaVersion bridges the gap |
+
+The three plugins do different jobs:
+
+- **[ViaVersion](https://hangar.papermc.io/ViaVersion/ViaVersion)** — lets **newer
+  clients join older servers**. This is the one the bot needs when your server
+  isn't on 26.3.
+- **[ViaBackwards](https://hangar.papermc.io/ViaVersion/ViaBackwards)** — lets **older
+  clients join newer servers**. Requires ViaVersion. Not needed by the bot;
+  useful so your players on 1.10–1.20 can still connect.
+- **[ViaRewind](https://hangar.papermc.io/ViaVersion/ViaRewind)** — extends ViaBackwards
+  down to **1.7.x / 1.8.x** clients. Requires ViaVersion *and* ViaBackwards.
+  For legacy clients only.
+
+Install all three if you want maximum version coverage for your players — the
+full set is standard practice on Aternos SMPs and is what the original setup
+guide recommends. The bot itself only depends on ViaVersion.
 
 ---
 
@@ -56,8 +81,12 @@ npm install
 
 **2. Enable cracked mode on Aternos**
 
-Server options → **Cracked: ON**. Also install
-`ViaVersion`, `ViaBackwards` and `ViaRewind` if you want older clients to connect.
+Server options → **Cracked: ON**. Then install the Via plugins:
+
+- **ViaVersion** — required if your server isn't on 26.3
+- **ViaBackwards** + **ViaRewind** — optional, for older players
+
+See [Via plugins](#via-plugins) for what each one actually does.
 
 **3. Edit `settings.json`**
 
@@ -98,7 +127,7 @@ Post a message to a Discord channel on every connect, disconnect, and kick.
 ```json
 "discord": {
   "enabled": true,
-  "displayName": "pasted aternos",
+  "displayName": "aternos-afk-bot",
   "avatarUrl": "https://.../avatar.png",
   "webhookUrl": "https://discord.com/api/webhooks/...",
   "events": { "connect": true, "disconnect": true, "chat": false }

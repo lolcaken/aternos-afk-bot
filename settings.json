@@ -1,5 +1,5 @@
 {
-  "name": "pasted aternos",
+  "name": "aternos-afk-bot",
   "bot-account": {
     "username": "botlol",
     "password": "",
@@ -51,7 +51,7 @@
   },
   "discord": {
     "enabled": false,
-    "displayName": "pasted aternos",
+    "displayName": "aternos-afk-bot",
     "avatarUrl": "",
     "webhookUrl": "",
     "events": {

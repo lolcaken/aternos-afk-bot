@@ -138,10 +138,10 @@ app.get('/', (req, res) => {
         </style>
       </head>
       <body>
-        <main role="main" aria-label="pasted aternos Dashboard">
+        <main role="main" aria-label="aternos-afk-bot Dashboard">
 
           <header>
-            <h1>pasted aternos Dashboard</h1>
+            <h1>aternos-afk-bot Dashboard</h1>
             <p>Minecraft server bot &middot; Live status</p>
           </header>
 
@@ -1698,7 +1698,7 @@ process.on("SIGINT", () => {
 // START THE BOT
 // ============================================================
 addLog("=".repeat(50));
-addLog("  pasted aternos v2.6.0");
+addLog("  aternos-afk-bot v2.6.0");
 addLog("=".repeat(50));
 addLog(`Server: ${config.server.ip}:${config.server.port}`);
 addLog(`Version: ${config.server.version}`);
